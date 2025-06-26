@@ -20,7 +20,7 @@ jobs:
     # Condicional - if
     # `${ expressao }`
     ## == comparação
-    if: ${{ github.event.workflow_run.conclusion = 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     # Passos do script de build
     steps:
