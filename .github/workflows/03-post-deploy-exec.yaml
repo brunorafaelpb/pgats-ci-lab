@@ -1,4 +1,4 @@
-# CI de nível 031 - Disparo após a conclusão de uma pipeline
+# CI de nível 03 - Disparo após a conclusão de uma pipeline
 name: 'Execução por Deploy'
 
 # Regras de disparos (gatilhos/triggers)

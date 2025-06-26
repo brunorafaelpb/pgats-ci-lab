@@ -1,4 +1,4 @@
-# CI de nível 03 - Disparo agendado
+# CI de nível 02 - Disparo agendado
 name: 'Execução Agendada'
 
 # Regras de disparos (gatilhos/triggers)
