@@ -1,11 +1,13 @@
-# CI de nível 03 - Disparo agendado
-name: 'Execução Agendada'
+# CI de nível 031 - Disparo após a conclusão de uma pipeline
+name: 'Execução por Deploy'
 
 # Regras de disparos (gatilhos/triggers)
-# Gatilho de execução agendada: schedule
+# Gatilho de execução a partir de outra pipe: workflow_run
 on: 
-  schedule:
-    - cron: '0 6 * * 1'
+  workflow_run:
+    workflows: ['Execução Manual']
+    types:
+      - completed
 
 
 
