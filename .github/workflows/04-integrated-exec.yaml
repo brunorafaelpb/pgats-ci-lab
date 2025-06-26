@@ -9,16 +9,19 @@
 #   - jobs - inspecao (bloco 1)
 #     - steps - instalar dependencias
 #     - steps - executar script de lint
-#   - jobs - unidade (bloco 1)
+#   - jobs - unidade (bloco 2)
+#     - depende de: inspecao
 #     - steps - instalar dependencias
 #     - steps - executar script de testes de unidade
-#   - job - e2e-tests (bloco 2)
+#   - job - e2e-tests (bloco 3)
+#     - depende de: unidade
 #     - steps - instalar dependencias
 #     - steps - subir a aplicacao localmente
 #     - steps - instalar navegador
 #     - steps - executar script de testes e2e
 #     - steps - publicar resultados de testes (zip/online)
-#   - jobs - deploy (após o workflow) (bloco 3)
+#   - jobs - deploy (após o workflow) (bloco 4)
+#     - depende de: e2e-tests
 #     - steps - instalar dependencias
 #     - steps - gerar artefatos de aplicacao
 #     - steps - publicar a aplicação no ambiente
@@ -49,6 +52,7 @@ jobs:
 
   unidade:
     runs-on: ubuntu-latest
+    needs: [inspecao]
     steps:
       - uses: actions/checkout@v4
 
@@ -63,6 +67,7 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
+    needs: [inspecao]
     steps:
       # Clone do projeto
       - uses: actions/checkout@v4
@@ -96,6 +101,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: [e2e-tests]
     steps:
       - name: Simulação do deploy
         run: echo "SIMULANDO O DEPLOY COM SUCESSO"
