@@ -16,6 +16,11 @@ jobs:
   e2e-test:
     # Máquina que o job vai executar
     runs-on: ubuntu-latest
+    
+    # Condicional - if
+    # `${ expressao }`
+    ## == comparação
+    if: ${{ github.event.workflow_run.conclusion = 'false' }}
 
     # Passos do script de build
     steps:
