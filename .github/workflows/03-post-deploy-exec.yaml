@@ -3,20 +3,18 @@ name: 'Execução por Deploy'
 
 # Regras de disparos (gatilhos/triggers)
 # Gatilho de execução a partir de outra pipe: workflow_run
-on: 
+on:
   workflow_run:
     workflows: ['Execução Manual']
     types:
       - completed
-
-
 
 # Trabalhos /tarefas dentro do pipeline = jobs
 jobs:
   e2e-test:
     # Máquina que o job vai executar
     runs-on: ubuntu-latest
-    
+
     # Condicional - if
     # `${ expressao }`
     ## == comparação
@@ -31,7 +29,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
-      
+
       # Instalação do Yarn
       - name: Instalando Yarn
         run: npm install -g yarn
@@ -51,5 +49,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-            name: relatorio
-            path: ./playwright-report
+          name: relatorio
+          path: ./playwright-report

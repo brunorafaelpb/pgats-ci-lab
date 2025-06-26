@@ -23,15 +23,13 @@
 #     - steps - gerar artefatos de aplicacao
 #     - steps - publicar a aplicação no ambiente
 
-
 # CI de nível 04 - Disparo dos testes dentro do pipe de dev
 name: 'Execução Integrada'
 
 # Regras de disparos (gatilhos/triggers)
 # Gatilho de execução a partir de outra pipe: workflow_run
-on: 
+on:
   workflow_dispatch:
-
 
 # Trabalhos /tarefas dentro do pipeline = jobs
 jobs:
@@ -48,7 +46,7 @@ jobs:
 
       - name: Checando padronização do código
         run: yarn lint
-  
+
   unidade:
     runs-on: ubuntu-latest
     steps:
@@ -73,7 +71,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22.x
-      
+
       # Instalação do Yarn
       - name: Instalando Yarn
         run: npm install -g yarn
@@ -84,7 +82,7 @@ jobs:
 
       # Instalação do Playwright
       - name: Instalando Playwright
-        run: yarn playwright install 
+        run: yarn playwright install
 
       # Executando os testes e2e
       - name: Executando Testes e2e
@@ -93,8 +91,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-            name: relatorio
-            path: ./playwright-report
+          name: relatorio
+          path: ./playwright-report
 
   deploy:
     runs-on: ubuntu-latest
